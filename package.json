@@ -9,6 +9,7 @@
     "pretty-bytes": "^2.0.1",
     "python-shell": "^0.4.0",
     "request": "^2.72.0",
+    "serve-static": "^1.10.3",
     "util": "^0.10.3"
   },
   "scripts": {

@@ -1,16 +1,30 @@
-//Lets require/import the HTTP module
+//https://github.com/yanunon/NeteaseCloudMusic/wiki/NetEase-cloud-music-analysis-API-%5BEN%5D
 var http = require('http');
 var util = require('util');
 var request = require('request');
 var m163 = require('./js/m163');
 var fs = require('fs');
+var serveStatic = require('serve-static');
 
+
+console.log('---/==========================/-');
+console.log('--/ music.163.com downloader /--');
+console.log('-/==========================/---');
+console.log('');
+console.log("Open the address for the Webserver in your browser");
+console.log("");
 
 //Lets define a port we want to listen to
 const PORT=8080;
+const PORT_WEB=8888;
+
+connect().use(serveStatic(__dirname)).listen(PORT_WEB, function(){
+    console.log('Webserver SW listen on http://localhost:'+PORT_WEB);
+});
 
 //We need a function which handles requests and send response
 function handleRequest(request, response){
+    response.setHeader("Access-Control-Allow-Origin", "*");
     var body = "";
   	request.on('data', function (chunk) {
     	body += chunk;
@@ -28,6 +42,8 @@ function handleRequest(request, response){
 		case "s":
 			var searchType = GETdata['t'];
 			var searchText = GETdata['s'];
+
+			console.log('SB: Searching for "'+searchText+'" in '+(searchType==100?"Artists":"")+(searchType==10?"Albums":"")+(searchType==1?"Songs":""));
 			m163.search(searchText, searchType, function(data){
 				response.writeHead(200);
     			response.end('{"code":"200", "data":'+JSON.stringify(data)+'}');
@@ -36,6 +52,7 @@ function handleRequest(request, response){
 		// ArtistAlbums
 		case "aa":
 			var artistID = GETdata['id'];
+			console.log('Showed albums for artist ' + artistID);
 			m163.artist(artistID, function(data){
 				response.writeHead(200);
     			response.end('{"code":"200", "data":'+JSON.stringify(data)+'}');
@@ -51,6 +68,7 @@ function handleRequest(request, response){
 		case "d":
 			var songURL = GETdata['url'];
 			var songName = GETdata['name']
+			console.log('SB: Starting download song "'+songName+'"');
 			m163.download(songURL, songName, "./download/", function(url, name, path){
 				response.writeHead(200);
 
@@ -67,7 +85,7 @@ function handleRequest(request, response){
 			break;
 		case "dalbum":
 			var albumID = GETdata['id'];
-			console.log("dalbum");
+			console.log("SB: Starting download album "+albumID);
 			m163.downloadAlbum(albumID, "./download/", function(){
 				response.writeHead(200);
 
@@ -77,14 +95,9 @@ function handleRequest(request, response){
 		default:
 			response.writeHead(200);
     		response.end('{"code":"0", "err":"wrong action"}');
+    		console.log("SB: Wrong action");
 		}
-
-    	console.log('GETed: ' + util.inspect(GETdata, false, null)  );
-
-
-
   	});
-
 }
 
 //Create a server
@@ -93,7 +106,7 @@ var server = http.createServer(handleRequest);
 //Lets start our server
 server.listen(PORT, function(){
     //Callback triggered when server is successfully listening. Hurray!
-    console.log("Server listening on: http://localhost:%s", PORT);
+    console.log('Backendserver SB listen on http://localhost:'+PORT);
 });
 
 function parseURLParams(query) {
@@ -105,3 +118,5 @@ function parseURLParams(query) {
   });
   return result;
 }
+
+
