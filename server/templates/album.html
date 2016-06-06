@@ -1,0 +1,31 @@
+<div>
+	<table>
+		<tr>
+			<td colspan="2">
+				<img src="{{picUrl}}" style="max-height: 25%; width: auto; ">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<span class="album-name">{{name}}</span>
+				<button onclick="downloadAlbum('{{id}}', 'high')">320kb/s MP3</button>
+				<button onclick="downloadAlbum('{{id}}', 'med')">160kb/s MP3</button>
+				<button onclick="downloadAlbum('{{id}}', 'low')"> 96kb/s MP3</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					{{#songs}}
+					<li>
+						<b>{{name}}</b>
+						<button onclick="downloadSong('{{id}}', '{{name}}')">320kb/s MP3</button>
+						<button onclick="downloadSong('{{id}}', '{{name}}')">160kb/s MP3</button>
+						<button onclick="downloadSong('{{id}}', '{{name}}')"> 96kb/s MP3</button>
+					</li>
+					{{/songs}}
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,30 @@
+{
+  "name": "music163downloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "connect": "^3.4.1",
+    "fs": "0.0.2",
+    "http": "0.0.0",
+    "python-shell": "^0.4.0",
+    "request": "^2.72.0",
+    "serve-static": "^1.10.3",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smithsf0x/music163Downloader.git"
+  },
+  "author": "smithsf0x",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smithsf0x/music163Downloader/issues"
+  },
+  "homepage": "https://github.com/smithsf0x/music163Downloader#readme"
+}

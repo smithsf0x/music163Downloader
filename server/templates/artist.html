@@ -1,0 +1,18 @@
+<div>
+	<table>
+		<tr>
+			<td>
+				<ul>
+					{{#albums}}
+					<li onclick="openAlbum({{id}})">
+						<img src="{{picUrl}}" class="small">
+						<br>
+						<b>{{name}}</b>
+						<br>
+					</li>
+					{{/albums}}
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>

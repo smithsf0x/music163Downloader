@@ -1,0 +1,109 @@
+/*
+* @Author: Simon Schmidt
+* @Date:   2016-06-06 20:20:06
+* @Last Modified by:   Simon Schmidt
+* @Last Modified time: 2016-06-06 22:28:28
+*/
+
+/*
+DARK PRIMARY COLOR   #455A64
+PRIMARY COLOR        #607D8B
+LIGHT PRIMARY COLOR  #CFD8DC
+TEXT / ICONS         #FFFFFF
+ACCENT COLOR         #03A9F4
+PRIMARY TEXT         #212121
+SECONDARY TEXT       #727272
+DIVIDER COLOR        #B6B6B6
+ */
+html,
+body{
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
+
+ul{
+	list-style-type: none;
+}
+
+button.flat,
+input[type=submit].flat{
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #607D8B;
+	color: #FFFFFF;
+	border-style: none;
+	border-radius: 2px;
+	border-color: #607D8B;
+}
+
+input[type=text].flat,
+input[type=email].flat,
+input[type=password].flat{
+	padding-right: 14px;
+	padding-left: 14px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	background-color: #607D8B;
+	color: #FFFFFF;
+	border-radius: 2px;
+	border: 2px solid #607D8B;
+}
+input[type=text].flat:focus,
+input[type=email].flat:focus,
+input[type=password].flat:focus{
+	border: 2px solid #03A9F4;
+	outline: none;
+}
+
+.primary-color{
+	background-color: #607D8B;
+	color: #FFFFFF;
+}
+.accent-color{
+	background-color: #03A9F4;
+	color: #FFFFFF;
+}
+
+
+div.navbar{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	height: 30px;
+	background-color: #455A64;
+}
+
+div.template-container{
+	height: 100%;
+	width: 100%;
+}
+
+img.large{
+	max-width: 25%;
+	height: auto;
+}
+img.medium{
+	max-width: 15%;
+
+	height: auto;
+}
+img.small{
+	max-width: 7%;
+	height: auto;
+}
+ul.list-artists{
+	width: 100%;
+	height: calc(100% - 40px);
+}
+div.tile-artist{
+	padding-bottom: 15px;
+}
+div.tile-artist span{
+
+}
