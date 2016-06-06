@@ -1,15 +1,12 @@
 #music163Downloader
 ##installation and starting
 
-```npm install``` to install all dependencies
+```cd server && npm install && node server.js```
 
-```node server.js ``` to start the server
 
 ##TODO
 * Search for Album
 * Search for Song
-* Download 320/160/96 kbps 
-* Implementing Templates
 * Implementing back-arrow-feature
 * Make a simple yet powerful UI/Design
 * CLI
