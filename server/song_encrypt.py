@@ -8,6 +8,7 @@ def encrypted_id(id):
     byte1_len = len(byte1)
     for i in xrange(len(byte2)):
         byte2[i] = byte2[i]^byte1[i%byte1_len]
+    print byte2
     m = md5.new()
     m.update(byte2)
     result = m.digest().encode('base64')[:-1]

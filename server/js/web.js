@@ -2,7 +2,7 @@
 * @Author: f0x
 * @Date:   2016-06-04 16:29:59
 * @Last Modified by:   Simon Schmidt
-* @Last Modified time: 2016-06-06 23:39:16
+* @Last Modified time: 2016-06-06 23:56:46
 */
 function init(){
 	$("#searchButton").click(function(){
@@ -24,16 +24,11 @@ function init(){
 	        }
 	    });
 	});
-
-
-
-	console.log("init");
 }
 
 
 function showArtists(data){
 	data = JSON.parse(data).data;
-
 	var view = {
     	artists : data.artists
     };
@@ -48,8 +43,6 @@ function showArtist(data){
     var view = {
     	albums : data
     };
-    console.log(view);
-
     $.get('http://localhost:8888/templates/artist.html', function(template, textStatus, jqXhr) {
     	var output = Mustache.render(template, view);
     	$("#result").html(output);
@@ -58,15 +51,12 @@ function showArtist(data){
 
 function showAlbum(data){
 	data = JSON.parse(data).data.album;
-	//console.log(data);
-	//$("#result").append(drawSingleAlbum(data.id, data.name, data.picUrl, data.songs ));
 	var view = {
     	id : data.id,
     	name : data.name,
     	picUrl : data.picUrl,
     	songs : data.songs
     };
-
     $.get('http://localhost:8888/templates/album.html', function(template, textStatus, jqXhr) {
     	var output = Mustache.render(template, view);
     	$("#result").html(output);
@@ -79,13 +69,12 @@ function openArtist(id){
         type: 'GET',
         url: 'http://localhost:8080',
         data: {
-          	"a":"aa",
+          	"a":"artist",
           	"id":id
         },
         success: function(data) {
         	$("#result").html("");
             showArtist(data);
-
         }
     });
 };
@@ -102,9 +91,7 @@ function openAlbum(id){
         },
         success: function(data) {
         	$("#result").html("");
-        	//console.log(data);
-            showAlbum(data);
-
+        	showAlbum(data);
         }
     });
 };
@@ -133,12 +120,8 @@ function downloadAlbum(id, quality){
             "q":quality
         },
         success: function(data) {
-
-
         }
     });
-
     return ;
-
 }
 

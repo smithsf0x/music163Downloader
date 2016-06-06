@@ -2,7 +2,7 @@
 * @Author: f0x
 * @Date:   2016-06-04 13:53:34
 * @Last Modified by:   Simon Schmidt
-* @Last Modified time: 2016-06-06 23:50:27
+* @Last Modified time: 2016-06-07 00:33:10
 */
 
 var http = require('http');
@@ -11,6 +11,7 @@ var fs = require('fs');
 var request = require('request');
 var querystring = require('querystring');
 var PythonShell = require('python-shell');
+var crypto = require('crypto');
 
 
 
@@ -130,19 +131,23 @@ module.exports = {
     });
   },
   generateLink: function(id, callback){
-    var options = {
-      mode: 'text',
-      args: [id]
-    };
-    try{
-      PythonShell.run('song_encrypt.py', options, function (err, results) {
-        if (err) throw err;
-        encrypted_song_id = results[0];
-        url = "http://p1.music.126.net/"+encrypted_song_id+"/"+id+".mp3"
-        return callback(url);
-      });
-    }catch(err){
-      console.log(err);
+    encrypted_song_id = module.exports.encryptSongId(id);
+    url = "http://p1.music.126.net/"+encrypted_song_id+"/"+id+".mp3"
+    return callback(url);
+
+  },
+  encryptSongId: function(id){
+    byte1 = new Buffer('3go8&$8*3*3h0k(2)2');
+    byte2 = new Buffer(id);
+    var byte1_len = byte1.length;
+    var byte2_len = byte2.length;
+    for(var i = 0; i<byte2_len; i++){
+      byte2[i] = byte2[i]^byte1[i%byte1_len];
     }
+    var md5 = crypto.createHash('md5').update(byte2).digest();
+    var result = new Buffer(md5).toString('base64');
+    result = result.replace("/","_");
+    result = result.replace("+","-");
+    return result;
   }
 };

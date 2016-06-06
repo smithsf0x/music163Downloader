@@ -8,18 +8,25 @@ var serveStatic = require('serve-static');
 var connect = require('connect');
 
 
-console.log('---/==========================/-');
-console.log('--/ music.163.com downloader /--');
-console.log('-/==========================/---');
-console.log('');
-console.log("Open the address for the Webserver in your browser");
-console.log("");
 
 //Lets define a port we want to listen to
 const PORT=8080;
 const PORT_WEB=8888;
 
 const DL_PATH = "./../download/";
+
+console.log('---/==========================/-');
+console.log('--/ music.163.com downloader /--');
+console.log('-/==========================/---');
+console.log('');
+if (!isDirSync(DL_PATH)) {
+	console.log("Download folder created");
+	console.log("");
+	fs.mkdirSync(DL_PATH);
+}
+console.log("Open the address for the Webserver in your browser");
+console.log("");
+
 
 connect().use(serveStatic(__dirname)).listen(PORT_WEB, function(){
     console.log('Webserver SW listen on http://localhost:'+PORT_WEB);
@@ -52,8 +59,8 @@ function handleRequest(request, response){
     			response.end('{"code":"200", "data":'+JSON.stringify(data)+'}');
 			});
 			break;
-		// ArtistAlbums
-		case "aa":
+		// Artist
+		case "artist":
 			var artistID = GETdata['id'];
 			console.log('Showed albums for artist ' + artistID);
 			m163.artist(artistID, function(data){
